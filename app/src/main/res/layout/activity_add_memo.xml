@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".AddMemoActivity">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="AGGIUNGI TITOLO"
+            android:textSize="10dp"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/emmasophia"
+            android:textAlignment="textStart"
+            android:paddingTop="20dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputTitolo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextTitolo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:hint="Aggiungi Titolo"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DA RIPETERE IL"
+            android:textSize="10dp"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/emmasophia"
+            android:textAlignment="textStart"
+            android:paddingTop="20dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <ToggleButton
+                android:id="@+id/lun"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:textOff="L"
+                android:textOn="L"
+                android:background="@drawable/toggle_bg"
+                android:textColor="@drawable/toogle_text_color"/>
+            <ToggleButton
+                android:id="@+id/mar"
+                android:layout_marginRight="10dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:textOff="M"
+                android:textOn="M"
+                android:background="@drawable/toggle_bg"
+                android:textColor="@drawable/toogle_text_color"/>
+            <ToggleButton
+                android:id="@+id/mer"
+                android:layout_marginRight="10dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:textOff="M"
+                android:textOn="M"
+                android:background="@drawable/toggle_bg"
+                android:textColor="@drawable/toogle_text_color"/>
+            <ToggleButton
+                android:id="@+id/gio"
+                android:layout_marginRight="10dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:textOff="G"
+                android:textOn="G"
+                android:background="@drawable/toggle_bg"
+                android:textColor="@drawable/toogle_text_color"/>
+            <ToggleButton
+                android:id="@+id/ven"
+                android:layout_marginRight="10dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:textOff="V"
+                android:textOn="V"
+                android:background="@drawable/toggle_bg"
+                android:textColor="@drawable/toogle_text_color"/>
+            <ToggleButton
+                android:id="@+id/sab"
+                android:layout_marginRight="10dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:textOff="S"
+                android:textOn="S"
+                android:background="@drawable/toggle_bg"
+                android:textColor="@drawable/toogle_text_color"/>
+            <ToggleButton
+                android:id="@+id/dom"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:textOff="D"
+                android:textOn="D"
+                android:background="@drawable/toggle_bg"
+                android:textColor="@drawable/toogle_text_color"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SELEZIONA ORARIO"
+            android:textSize="10dp"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/emmasophia"
+            android:textAlignment="textStart"
+            android:paddingTop="20dp" />
+
+        <TimePicker android:id="@+id/timePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:timePickerMode="clock" />
+
+        <Button
+            android:id="@+id/salva_memo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="SALVA"
+            android:textSize="10dp"
+            android:textColor="#FFFF"
+            android:background="@color/colorAccent"
+            android:fontFamily="@font/emmasophia"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:onClick="salvaMemo"/>
+    </LinearLayout>
+</ScrollView>

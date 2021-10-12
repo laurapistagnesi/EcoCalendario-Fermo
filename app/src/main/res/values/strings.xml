@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">EcoCalendario Fermo</string>
+    <string name="logout">Logout</string>
+    <string name="menu">menu</string>
+    <string name="info">info</string>
+    <string name="eco_calendario">Eco Calendario</string>
 </resources>
