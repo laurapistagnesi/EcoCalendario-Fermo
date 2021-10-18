@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:remove="android:appComponentFactory"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.ecocalendariofermo">
+    package="com.example.ecocalendariofermo"
+    tools:remove="android:appComponentFactory">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
-    <uses-permission android:name="android:permission.BIND_JOB_SERVICE"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="android:permission.BIND_JOB_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION"/>
+    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
 
@@ -26,7 +26,11 @@
         android:roundIcon="@drawable/ic_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DeleteMemoActivity"/>
+        <activity android:name=".InfoRifiuto"></activity>
+        <activity android:name=".QrReaderActivity" />
+        <activity android:name=".MappaActivity" />
+        <activity android:name=".RifiutarioActivity" />
+        <activity android:name=".DeleteMemoActivity" />
         <activity android:name=".AddMemoActivity" />
         <activity android:name=".CalendarActivity" />
         <activity android:name=".LoginActivity" />
@@ -40,18 +44,17 @@
 
         <receiver
             android:name=".AlarmReceiver"
-            android:process=":remote" >
-        </receiver>
+            android:process=":remote" />
 
         <service
             android:name=".AlarmService"
             android:exported="false" />
 
-        <receiver android:name=".NotificationForegroundReceiver"/>
+        <receiver android:name=".NotificationForegroundReceiver" />
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
     </application>
+
 </manifest>

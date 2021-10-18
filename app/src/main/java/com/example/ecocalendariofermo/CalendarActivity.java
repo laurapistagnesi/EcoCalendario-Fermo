@@ -285,4 +285,22 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
         startActivity(intent);
         finish();
     }
+
+    public void goRifiutario(View view){
+        Intent intent = new Intent(CalendarActivity.this, RifiutarioActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void goMap(View v){
+        Intent intent = new Intent(CalendarActivity.this, MappaActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void goQR(View v){
+        Intent intent = new Intent(CalendarActivity.this, QrReaderActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

@@ -58,37 +58,37 @@ public class DeleteMemoActivity extends AppCompatActivity {
         if(sharedPreferences.contains("Sveglia lunedi")){
             String m1 = getDate(sharedPreferences.getLong("Sveglia lunedi", 0), "HH:mm");
             Log.d(TAG, "SVEGLIA LUNEDI ALLE ORE " + m1);
-            arrayList.add(new Memo("Lunedi", m1, R.drawable.ic_baseline_delete_24));
+            arrayList.add(new Memo("Lunedi", m1, R.drawable.ic_vetro));
         }
         if(sharedPreferences.contains("Sveglia martedi")){
             String m2 = getDate(sharedPreferences.getLong("Sveglia martedi", 0), "HH:mm");
             Log.d(TAG, "SVEGLIA MARTEDI ALLE ORE " + m2);
-            arrayList.add(new Memo("Martedi", m2, R.drawable.ic_baseline_delete_24));
+            arrayList.add(new Memo("Martedi", m2, R.drawable.ic_vetro));
         }
         if(sharedPreferences.contains("Sveglia mercoledi")){
             String m3 = getDate(sharedPreferences.getLong("Sveglia mercoledi", 0), "HH:mm");
             Log.d(TAG, "SVEGLIA MERCOLEDI ALLE ORE " + m3);
-            arrayList.add(new Memo("Mercoledi", m3, R.drawable.ic_baseline_delete_24));
+            arrayList.add(new Memo("Mercoledi", m3, R.drawable.ic_vetro));
         }
         if(sharedPreferences.contains("Sveglia giovedi")){
             String m4 = getDate(sharedPreferences.getLong("Sveglia giovedi", 0), "HH:mm");
             Log.d(TAG, "SVEGLIA GIOVEDI ALLE ORE " + m4);
-            arrayList.add(new Memo("Giovedi", m4, R.drawable.ic_baseline_delete_24));
+            arrayList.add(new Memo("Giovedi", m4, R.drawable.ic_vetro));
         }
         if(sharedPreferences.contains("Sveglia venerdi")){
             String m5 = getDate(sharedPreferences.getLong("Sveglia venerdi", 0), "HH:mm");
             Log.d(TAG, "SVEGLIA VENERDI ALLE ORE " + m5);
-            arrayList.add(new Memo("Venerdi", m5, R.drawable.ic_baseline_delete_24));
+            arrayList.add(new Memo("Venerdi", m5, R.drawable.ic_vetro));
         }
         if(sharedPreferences.contains("Sveglia sabato")){
             String m6 = getDate(sharedPreferences.getLong("Sveglia sabato", 0), "HH:mm");
             Log.d(TAG, "SVEGLIA SABATO ALLE ORE " + m6);
-            arrayList.add(new Memo("Sabato", m6, R.drawable.ic_baseline_delete_24));
+            arrayList.add(new Memo("Sabato", m6, R.drawable.ic_vetro));
         }
         if(sharedPreferences.contains("Sveglia domenica")){
             String m7 = getDate(sharedPreferences.getLong("Sveglia domenica", 0), "HH:mm");
             Log.d(TAG, "SVEGLIA DOMENICA ALLE ORE " + m7);
-            arrayList.add(new Memo("Domenica", m7, R.drawable.ic_baseline_delete_24));
+            arrayList.add(new Memo("Domenica", m7, R.drawable.ic_vetro));
         }
 
         MemoAdapter memoAdapter = new MemoAdapter(this, R.layout.list_row, arrayList);

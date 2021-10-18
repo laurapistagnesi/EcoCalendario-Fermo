@@ -45,7 +45,8 @@
             android:fontFamily="@font/emmasophia"
             android:text="Rifiutario"
             android:padding="12dp"
-            android:layout_marginStart="16dp"/>
+            android:layout_marginStart="16dp"
+            android:onClick="goRifiutario"/>
     </LinearLayout>
 
     <LinearLayout
@@ -66,7 +67,8 @@
             android:fontFamily="@font/emmasophia"
             android:text="Isole Ecologiche"
             android:padding="12dp"
-            android:layout_marginStart="16dp"/>
+            android:layout_marginStart="16dp"
+            android:onClick="goMap"/>
     </LinearLayout>
 
     <LinearLayout
@@ -88,7 +90,8 @@
             android:fontFamily="@font/emmasophia"
             android:text="QR Reader"
             android:padding="12dp"
-            android:layout_marginStart="11dp"/>
+            android:layout_marginStart="11dp"
+            android:onClick="goQR"/>
     </LinearLayout>
 
 </LinearLayout>
