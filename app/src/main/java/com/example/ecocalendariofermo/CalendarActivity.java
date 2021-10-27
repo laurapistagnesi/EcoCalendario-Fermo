@@ -189,9 +189,9 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
     private void showSimpleAdapterAlertDialog()
     {
         // Each image in array will be displayed at each item beginning.
-        int[] imageIdArr = {R.drawable.ic_indifferenziato, R.drawable.ic_plastic, R.drawable.ic_carta};
+        int[] imageIdArr = {R.drawable.ic_indifferenziato, R.drawable.ic_plastic, R.drawable.ic_carta, R.drawable.ic_baseline_warning_24};
         // Each item text.
-        String[] listItemArr = {"Rifiuti non riciclabili", "Plastica", "Carta e Cartone"};
+        String[] listItemArr = {"Rifiuti non riciclabili", "Plastica", "Carta e Cartone", "In caso di giorni festivi il rifiuto verrà raccolto il primo giorno utile successivo"};
 
         // Image and text item data's key.
         final String CUSTOM_ADAPTER_IMAGE = "image";
@@ -298,8 +298,14 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
         finish();
     }
 
-    public void goQR(View v){
-        Intent intent = new Intent(CalendarActivity.this, QrReaderActivity.class);
+    public void goInfo(View v){
+        Intent intent = new Intent(CalendarActivity.this, InfoActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void goSegnalazioni(View v){
+        Intent intent = new Intent(CalendarActivity.this, SegnalazioniActivity.class);
         startActivity(intent);
         finish();
     }

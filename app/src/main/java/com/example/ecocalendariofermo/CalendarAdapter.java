@@ -13,7 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
 {
     private final ArrayList<LocalDate> days;

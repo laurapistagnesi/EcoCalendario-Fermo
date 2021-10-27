@@ -26,8 +26,23 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rifiutario_recycler"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_width="match_parent" />
+        android:orientation="horizontal">
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:indeterminateDuration="@android:integer/config_longAnimTime"
+            android:indeterminateDrawable="@drawable/pb"/>
+
+        <ListView
+            android:id="@+id/rifiutiList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
 </LinearLayout>

@@ -34,6 +34,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthProvider;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
@@ -45,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private TextInputEditText usrLogin, pswLogin;
     private Button loginButton;
-    private TextInputEditText usrReg, pswReg;
+    private TextInputEditText usrReg, pswReg, pswReg2;
     private Button registerButton;
     private GoogleSignInClient mGoogleSignInClient;
     private SignInButton loginGoogleButton;
@@ -62,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = (Button) findViewById(R.id.login_button);
         usrReg = (TextInputEditText) findViewById(R.id.editTextEmailReg);
         pswReg = (TextInputEditText) findViewById(R.id.editTextPasswordReg);
+        pswReg2 = (TextInputEditText) findViewById(R.id.editTextPasswordReg2);
         registerButton = (Button) findViewById(R.id.register_button);
         loginGoogleButton = (SignInButton) findViewById(R.id.bt_log_in_google);
         signinGoogleButton = (SignInButton) findViewById(R.id.bt_sign_in_google);
@@ -127,13 +129,17 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent = new Intent(LoginActivity.this, CalendarActivity.class);
                             finish();
                             startActivity(intent);
+                            Toast.makeText(getApplicationContext(), "Login effettuato", Toast.LENGTH_SHORT).show();
                         } else {
                             if(task.getException() instanceof FirebaseAuthInvalidCredentialsException){
                                 Toast.makeText(getApplicationContext(), "Password errata. Prova di nuovo o accedi con Google!", Toast.LENGTH_SHORT).show();
                             }
+                            if(task.getException() instanceof FirebaseAuthInvalidUserException){
+                                Toast.makeText(getApplicationContext(), "Non ci sono utenti registrati con questa email!", Toast.LENGTH_SHORT).show();
+                            }
                             else {
                                 Log.d(TAG, task.getException().getMessage());
-                                Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Password errata. Prova di nuovo o accedi con Google!",Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -146,6 +152,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String email = usrReg.getText().toString();
                 String password = pswReg.getText().toString();
+                final String password2 = pswReg2.getText().toString().trim();
 
                 //controllo se viene inserita un email e login nel caso che l'email vada bene
                 if (email.isEmpty()) {
@@ -172,15 +179,22 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
+                if (!password.equals(password2) || password2.isEmpty()) {
+                    pswReg2.setError("Non corrisponde");
+                    pswReg2.requestFocus();
+                    return;
+                }
+
                 mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             finish();;
                             startActivity(new Intent(LoginActivity.this, CalendarActivity.class));
+                            Toast.makeText(getApplicationContext(), "Registrazione e Login effettuati", Toast.LENGTH_SHORT).show();
                         }else{
                             if(task.getException() instanceof FirebaseAuthUserCollisionException){
-                                Toast.makeText(getApplicationContext(), "Account già esistente", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Email già in uso", Toast.LENGTH_SHORT).show();
                             }
                             else {
                                 Log.d(TAG, task.getException().getMessage());
@@ -252,10 +266,10 @@ public class LoginActivity extends AppCompatActivity {
                         String email = firebaseUser.getEmail();
                         Log.d(TAG, "onSuccess: Email: "+email);
                         if(authResult.getAdditionalUserInfo().isNewUser()){
-                            Toast.makeText(getApplicationContext(), "Account creato...\n"+email ,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Registrazione e Login effettuati", Toast.LENGTH_SHORT).show();
                         }
                         else{
-                            Toast.makeText(getApplicationContext(), "Account esistente" ,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Login effettuato", Toast.LENGTH_SHORT).show();
                         }
 
                         Intent calendarIntent = new Intent(LoginActivity.this, CalendarActivity.class);

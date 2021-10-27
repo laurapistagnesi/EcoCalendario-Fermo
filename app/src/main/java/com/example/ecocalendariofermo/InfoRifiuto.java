@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ public class InfoRifiuto extends AppCompatActivity {
     TextView info;
     RelativeLayout layInfo;
     ImageView icon;
+    TextView map;
 
 
     @Override
@@ -32,6 +34,7 @@ public class InfoRifiuto extends AppCompatActivity {
         info = findViewById(R.id.info);
         layInfo = findViewById(R.id.cardInfo);
         icon = findViewById(R.id.logo_info);
+        map = findViewById(R.id.to_map);
         getInfo();
     }
 
@@ -55,21 +58,69 @@ public class InfoRifiuto extends AppCompatActivity {
                 break;
             case "Alluminio":
                 icon.setImageResource(R.drawable.ic_alluminio);
+                map.setText("Clicca per trovare l'isola ecologica piu' vicina");
+                map.setPaintFlags(map.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                map.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(InfoRifiuto.this, MappaActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+                });
                 break;
             case "Raccolta abiti HUMANA o Indifferenziata":
                 icon.setImageResource(R.drawable.tshirt);
+                map.setText("Clicca per trovare la raccolta abiti HUMANA piu' vicina");
+                map.setPaintFlags(map.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                map.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(InfoRifiuto.this, MappaActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+                });
                 break;
             case "Rivenditori o Ecocentro comunale":
-                icon.setImageResource(R.drawable.ic_recycle);
-                break;
             case "Ecocentro comunale":
                 icon.setImageResource(R.drawable.ic_recycle);
+                map.setText("Clicca per trovare l'Ecocentro piu' vicino");
+                map.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+                map.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(InfoRifiuto.this, MappaActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+                });
                 break;
             case "Vetro":
                 icon.setImageResource(R.drawable.ic_vetro);
+                map.setText("Clicca per trovare l'isola ecologica piu' vicina");
+                map.setPaintFlags(map.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                map.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(InfoRifiuto.this, MappaActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+                });
                 break;
             case "Organico":
                 icon.setImageResource(R.drawable.ic_organico);
+                map.setText("Clicca per trovare l'isola ecologica piu' vicina");
+                map.setPaintFlags(map.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                map.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(InfoRifiuto.this, MappaActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+                });
                 break;
             default: icon.setImageResource(R.drawable.ic_logo);
         }

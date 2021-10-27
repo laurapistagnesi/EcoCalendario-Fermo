@@ -56,6 +56,20 @@
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputPasswordReg2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextPasswordReg2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Inserisci di nuovo la Password"
+                android:maxLines="1"
+                android:inputType="textPassword"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.gms.common.SignInButton
             android:id="@+id/bt_sign_in_google"
             android:layout_width="wrap_content"

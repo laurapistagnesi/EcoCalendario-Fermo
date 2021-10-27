@@ -36,6 +36,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:src="@drawable/ic_baseline_eco_24"/>
         
         <TextView
@@ -58,6 +59,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:src="@drawable/ic_baseline_location_on_24"/>
 
         <TextView
@@ -80,7 +82,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/qrcode"
+            android:src="@drawable/ic_baseline_art_track_24"
             android:layout_marginStart="5dp"/>
 
         <TextView
@@ -88,10 +90,33 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/emmasophia"
-            android:text="QR Reader"
+            android:text="Informazioni"
             android:padding="12dp"
             android:layout_marginStart="11dp"
-            android:onClick="goQR"/>
+            android:onClick="goInfo"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_report_problem_24"
+            android:layout_marginStart="5dp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/emmasophia"
+            android:text="Segnalazioni"
+            android:padding="12dp"
+            android:layout_marginStart="11dp"
+            android:onClick="goSegnalazioni"/>
     </LinearLayout>
 
 </LinearLayout>

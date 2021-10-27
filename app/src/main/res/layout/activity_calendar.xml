@@ -29,6 +29,7 @@
 
         <TextView
             android:id="@+id/month_year_TV"
+            android:fontFamily="@font/emmasophia"
             android:layout_width="0dp"
             android:layout_weight="5"
             android:layout_height="wrap_content"
@@ -54,67 +55,74 @@
         android:orientation="horizontal">
 
         <TextView
+            android:fontFamily="@font/emmasophia"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="LUN"
             android:textColor="@color/colorPrimaryDark"
             android:textAlignment="center"
-            android:textSize="16sp">
+            android:textSize="10dp">
         </TextView>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/emmasophia"
             android:text="MAR"
             android:textColor="@color/colorPrimaryDark"
             android:textAlignment="center"
-            android:textSize="16sp">
+            android:textSize="10dp">
         </TextView>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/emmasophia"
             android:text="MER"
             android:textColor="@color/colorPrimaryDark"
             android:textAlignment="center"
-            android:textSize="16sp">
+            android:textSize="10dp">
         </TextView>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/emmasophia"
             android:text="GIO"
             android:textColor="@color/colorPrimaryDark"
             android:textAlignment="center"
-            android:textSize="16sp">
+            android:textSize="10dp">
         </TextView>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/emmasophia"
             android:text="VEN"
             android:textColor="@color/colorPrimaryDark"
             android:textAlignment="center"
-            android:textSize="16sp">
+            android:textSize="10dp">
         </TextView>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/emmasophia"
             android:text="SAB"
             android:textColor="@color/colorPrimaryDark"
             android:textAlignment="center"
-            android:textSize="16sp">
+            android:textSize="10dp">
         </TextView>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/emmasophia"
             android:text="DOM"
             android:textColor="@color/colorPrimaryDark"
             android:textAlignment="center"
-            android:textSize="16sp">
+            android:textSize="10dp">
         </TextView>
 
     </LinearLayout>
@@ -139,10 +147,10 @@
 
         <TextView
             android:id="@+id/text_fab2"
-            android:textSize="10dp"
+            android:textSize="18dp"
             android:translationZ="10dp"
             android:textAlignment="center"
-            android:fontFamily="@font/emmasophia"
+            android:fontFamily="@font/apollo"
             android:textStyle="bold"
             android:background="@drawable/bg_textview"
             android:layout_width="wrap_content"
@@ -182,10 +190,10 @@
             android:layout_marginEnd="72dp"
             android:layout_marginBottom="24dp"
             android:layout_toStartOf="@+id/fab1"
-            android:fontFamily="@font/emmasophia"
+            android:fontFamily="@font/apollo"
             android:text="Imposta \n Promemoria"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="10dp"
+            android:textSize="18dp"
             android:visibility="invisible" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

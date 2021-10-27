@@ -17,6 +17,8 @@
     <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -26,18 +28,34 @@
         android:roundIcon="@drawable/ic_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".InfoRifiuto"></activity>
-        <activity android:name=".QrReaderActivity" />
-        <activity android:name=".MappaActivity" />
-        <activity android:name=".RifiutarioActivity" />
-        <activity android:name=".DeleteMemoActivity" />
-        <activity android:name=".AddMemoActivity" />
-        <activity android:name=".CalendarActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".SplashScreen">
+        <activity android:name=".InfoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".InfoRifiuto"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SegnalazioniActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="message/rfc822"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".MappaActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RifiutarioActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".DeleteMemoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AddMemoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CalendarActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SplashScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -55,6 +73,9 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/map_key" />
     </application>
 
 </manifest>

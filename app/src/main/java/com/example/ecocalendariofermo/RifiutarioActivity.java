@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -22,9 +23,13 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -50,13 +55,15 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 public class RifiutarioActivity extends AppCompatActivity{
 
     FirebaseFirestore db;
-    private RecyclerView recyclerView;
-    FirestoreRecyclerAdapter adapter;
     EditText searchEdit;
+    ListView listView;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,83 +73,88 @@ public class RifiutarioActivity extends AppCompatActivity{
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#166318")));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        progressBar = findViewById(R.id.progressBar);
         searchEdit = findViewById(R.id.editSearch);
-
-        recyclerView = findViewById(R.id.rifiutario_recycler);
+        listView = findViewById(R.id.rifiutiList);
         db = FirebaseFirestore.getInstance();
-        Query query1 = db.collection("Rifiuti");
-        setElenco(query1);
+        setElenco();
         search();
     }
 
-    private void setElenco(Query query) {
-        FirestoreRecyclerOptions<Rifiuto> options = new FirestoreRecyclerOptions.Builder<Rifiuto>()
-                .setQuery(query, Rifiuto.class)
-                .build();
-        Log.e("TAG", String.valueOf(query));
-        adapter = new FirestoreRecyclerAdapter<Rifiuto, RifiutarioViewHolder>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull RifiutarioViewHolder viewHolder, int i, @NonNull Rifiuto rifiuto) {
-                viewHolder.nomeRifiuto.setText(rifiuto.getName());
-                viewHolder.nomeRifiuto.setOnClickListener(new View.OnClickListener() {
+    private void setElenco() {
+        Query firebaseSearchQuery = db.collection("Rifiuti");
+        ArrayList<Rifiuto> datifiltrati = new ArrayList<>();
+        firebaseSearchQuery.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(), InfoRifiuto.class);
-                        intent.putExtra("Name", rifiuto.getName());
-                        intent.putExtra("Type", rifiuto.getType());
-                        if(rifiuto.getInfo() == null){
-                            intent.putExtra("Info", "null");
-                        } else{
-                            intent.putExtra("Info", rifiuto.getInfo());
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        progressBar.setVisibility(View.GONE);
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                datifiltrati.add(new Rifiuto(document.getString("name"), document.getString("type"), document.getString("info")));
+                            }
+                            Log.d("TAG", String.valueOf(datifiltrati));
+                            RifiutarioAdapter rifiutarioAdapter = new RifiutarioAdapter(getApplicationContext(), R.layout.list_items, datifiltrati);
+                            listView.setAdapter(rifiutarioAdapter);
+                        } else {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
                         }
-                        startActivity(intent);
                     }
                 });
-            }
-
-            @NonNull
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public RifiutarioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_items, parent,false);
-                return new RifiutarioViewHolder(view);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), InfoRifiuto.class);
+                intent.putExtra("Name", datifiltrati.get(position).getName());
+                intent.putExtra("Type", datifiltrati.get(position).getType());
+                if(datifiltrati.get(position).getInfo() == null){
+                    intent.putExtra("Info", "null");
+                } else{
+                    intent.putExtra("Info", datifiltrati.get(position).getInfo());
+                }
+                startActivity(intent);
             }
-        };
-
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
-        recyclerView.setNestedScrollingEnabled(false);
+        });
     }
 
     public void search(){
         searchEdit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s != null && s.length()>0){
-                    char[] letters=s.toString().toCharArray();
-                    String firstLetter = String.valueOf(letters[0]).toUpperCase();
-                    String remainingLetters = s.toString().substring(1).toLowerCase();
-                    s=firstLetter+remainingLetters;
-                }
-
-                Query firebaseSearchQuery = db.collection("Rifiuti").orderBy("name").startAt(s.toString())
-                        .endAt(s.toString() + "uf8ff");
+                Query firebaseSearchQuery = db.collection("Rifiuti");
                 firebaseSearchQuery.get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
-                                    setElenco(firebaseSearchQuery);
-                                    adapter.startListening();
+                                    ArrayList<Rifiuto> datifiltrati = new ArrayList<>();
                                     for (QueryDocumentSnapshot document : task.getResult()) {
-                                        Log.d("TAG", document.getId() + " => " + document.getData());
+                                        if (Objects.requireNonNull(document.getString("name").toLowerCase()).contains(s.toString().toLowerCase())){
+                                            Log.d("TAG", document.getId() + " => " + document.getData());
+                                            datifiltrati.add(new Rifiuto(document.getString("name"), document.getString("type"), document.getString("info")));
+                                        }
                                     }
+                                    Log.d("TAG", String.valueOf(datifiltrati));
+                                    RifiutarioAdapter rifiutarioAdapter = new RifiutarioAdapter(getApplicationContext(), R.layout.list_items, datifiltrati);
+                                    listView.setAdapter(rifiutarioAdapter);
+                                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                        @Override
+                                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                            Intent intent = new Intent(getApplicationContext(), InfoRifiuto.class);
+                                            intent.putExtra("Name", datifiltrati.get(position).getName());
+                                            intent.putExtra("Type", datifiltrati.get(position).getType());
+                                            if(datifiltrati.get(position).getInfo() == null){
+                                                intent.putExtra("Info", "null");
+                                            } else{
+                                                intent.putExtra("Info", datifiltrati.get(position).getInfo());
+                                            }
+                                            startActivity(intent);
+                                        }
+                                    });
                                 } else {
                                     Log.d("TAG", "Error getting documents: ", task.getException());
                                 }
@@ -170,17 +182,5 @@ public class RifiutarioActivity extends AppCompatActivity{
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    @Override
-    protected void onStop(){
-        super.onStop();
-        adapter.stopListening();
-    }
-
-    @Override
-    protected void onStart(){
-        super.onStart();
-        adapter.startListening();
     }
 }
