@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_register"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
@@ -65,7 +64,7 @@
                 android:id="@+id/editTextPasswordReg2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Inserisci di nuovo la Password"
+                android:hint="@string/inserisci_di_nuovo_la_password"
                 android:maxLines="1"
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -87,7 +86,7 @@
             android:textColor="#fff"
             android:textSize="10dp"
             android:background="@drawable/login_button"
-            android:text="Registrati"
+            android:text="@string/registrati"
             android:fontFamily="@font/emmasophia"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"/>
@@ -99,7 +98,7 @@
             android:textAlignment="center"
             android:textStyle="bold"
             android:textColor="@color/colorSecondary"
-            android:text="Hai gia' un account? Clicca qui!"
+            android:text="@string/hai_gia_un_account_clicca_qui"
             android:onClick="viewLoginLayout"
             android:fontFamily="@font/emmasophia"
             android:textSize="8dp"

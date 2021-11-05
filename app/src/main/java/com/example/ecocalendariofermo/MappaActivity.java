@@ -3,18 +3,11 @@ package com.example.ecocalendariofermo;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDialogFragment;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -23,12 +16,10 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -64,7 +55,6 @@ public class MappaActivity extends AppCompatActivity implements OnMapReadyCallba
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
-
         map = googleMap;
         LatLng ecocentro = new LatLng(43.14658975621922, 13.708196637945887);
         LatLng humana1 = new LatLng(43.187971374986425, 13.660899362113252);
@@ -73,6 +63,10 @@ public class MappaActivity extends AppCompatActivity implements OnMapReadyCallba
         LatLng isola2 = new LatLng(43.16576929167554, 13.733717960478433);
         LatLng isola3 = new LatLng(43.166992684576485, 13.7296305978707);
         LatLng isola4 = new LatLng(43.16397524993229, 13.723429989719907);
+        LatLng isola5 = new LatLng(43.15703030808601, 13.723711813640833);
+        LatLng isola6 = new LatLng(43.15641043733158, 13.734437453690909);
+        LatLng isola7 = new LatLng(43.15638762050798, 13.727945203706808);
+        LatLng isola8 = new LatLng(43.159504129577414, 13.708149728696204);
         MarkerOptions marker = new MarkerOptions().title("Isola Ecologica").icon(BitmapDescriptorFactory.fromBitmap(getMarkerBitmapFromView(R.drawable.ic_isole)));
         map.addMarker(new MarkerOptions().position(humana1).title("Raccolta abiti HUMANA").icon(BitmapDescriptorFactory.fromBitmap(getMarkerBitmapFromView(R.drawable.tshirt))));
         map.addMarker(new MarkerOptions().position(humana2).title("Raccolta abiti HUMANA").icon(BitmapDescriptorFactory.fromBitmap(getMarkerBitmapFromView(R.drawable.tshirt))));
@@ -81,11 +75,15 @@ public class MappaActivity extends AppCompatActivity implements OnMapReadyCallba
         map.addMarker(marker.position(isola2));
         map.addMarker(marker.position(isola3));
         map.addMarker(marker.position(isola4));
+        map.addMarker(marker.position(isola5));
+        map.addMarker(marker.position(isola6));
+        map.addMarker(marker.position(isola7));
+        map.addMarker(marker.position(isola8));
         CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(ecocentro)      // Sets the center of the map
-                .zoom(12)                   // Sets the zoom
-                .bearing(90)                // Sets the orientation of the camera to east
-                .tilt(30)                   // Sets the tilt of the camera to 30 degrees
+                .target(ecocentro)          //Imposta il centro della mappa
+                .zoom(12)                   //Imposta lo zoom
+                .bearing(90)                //Imposta l'orientamento verso est
+                .tilt(30)                   //Imposta l'inclinazione a 30 gradi
                 .build();
 
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
@@ -93,7 +91,6 @@ public class MappaActivity extends AppCompatActivity implements OnMapReadyCallba
     }
 
     private Bitmap getMarkerBitmapFromView(@DrawableRes int resId) {
-
         View customMarkerView = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.view_custom_marker, null);
         ImageView markerImageView = (ImageView) customMarkerView.findViewById(R.id.image);
         markerImageView.setImageResource(resId);

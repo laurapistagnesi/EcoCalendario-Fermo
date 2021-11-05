@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -13,7 +12,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="AGGIUNGI TITOLO"
+            android:text="@string/aggiungi_titolo"
             android:textSize="10dp"
             android:layout_marginStart="10dp"
             android:textColor="@color/colorPrimaryDark"
@@ -32,13 +31,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:hint="Aggiungi Titolo"/>
+                android:hint="@string/aggiungi_titolo_min"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="DA RIPETERE IL"
+            android:text="@string/da_ripetere_il"
             android:textSize="10dp"
             android:layout_marginStart="10dp"
             android:textColor="@color/colorPrimaryDark"
@@ -55,8 +54,8 @@
                 android:layout_marginRight="10dp"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:textOff="L"
-                android:textOn="L"
+                android:textOff="@string/l"
+                android:textOn="@string/l"
                 android:background="@drawable/toggle_bg"
                 android:textColor="@drawable/toogle_text_color"/>
             <ToggleButton
@@ -64,8 +63,8 @@
                 android:layout_marginRight="10dp"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:textOff="M"
-                android:textOn="M"
+                android:textOff="@string/m"
+                android:textOn="@string/m"
                 android:background="@drawable/toggle_bg"
                 android:textColor="@drawable/toogle_text_color"/>
             <ToggleButton
@@ -73,8 +72,8 @@
                 android:layout_marginRight="10dp"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:textOff="M"
-                android:textOn="M"
+                android:textOff="@string/me"
+                android:textOn="@string/me"
                 android:background="@drawable/toggle_bg"
                 android:textColor="@drawable/toogle_text_color"/>
             <ToggleButton
@@ -82,8 +81,8 @@
                 android:layout_marginRight="10dp"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:textOff="G"
-                android:textOn="G"
+                android:textOff="@string/g"
+                android:textOn="@string/g"
                 android:background="@drawable/toggle_bg"
                 android:textColor="@drawable/toogle_text_color"/>
             <ToggleButton
@@ -91,8 +90,8 @@
                 android:layout_marginRight="10dp"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:textOff="V"
-                android:textOn="V"
+                android:textOff="@string/v"
+                android:textOn="@string/v"
                 android:background="@drawable/toggle_bg"
                 android:textColor="@drawable/toogle_text_color"/>
             <ToggleButton
@@ -100,16 +99,16 @@
                 android:layout_marginRight="10dp"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:textOff="S"
-                android:textOn="S"
+                android:textOff="@string/s"
+                android:textOn="@string/s"
                 android:background="@drawable/toggle_bg"
                 android:textColor="@drawable/toogle_text_color"/>
             <ToggleButton
                 android:id="@+id/dom"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:textOff="D"
-                android:textOn="D"
+                android:textOff="@string/d"
+                android:textOn="@string/d"
                 android:background="@drawable/toggle_bg"
                 android:textColor="@drawable/toogle_text_color"/>
         </LinearLayout>
@@ -117,7 +116,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SELEZIONA ORARIO"
+            android:text="@string/seleziona_orario"
             android:textSize="10dp"
             android:layout_marginStart="10dp"
             android:textColor="@color/colorPrimaryDark"
@@ -135,7 +134,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="SALVA"
+            android:text="@string/salva"
             android:textSize="10dp"
             android:textColor="#FFFF"
             android:background="@color/colorAccent"

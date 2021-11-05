@@ -14,13 +14,21 @@
       },
       "oauth_client": [
         {
+          "client_id": "1019300904917-l5fe7c8rpopc2qd0msloej4co8ssvklf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ecocalendariofermo",
+            "certificate_hash": "5b4b3a907af5ed1b8392ef7a3136658c317d6a85"
+          }
+        },
+        {
           "client_id": "1019300904917-ltmcmij1g8dgplaeje9sj0gkg612hjlm.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC980GN0Au63gUqHpTChu_13FZItxmmm-k"
+          "current_key": "AIzaSyCukiKCP9NmzznfQFbJZmih4YfJdmiWMAs"
         }
       ],
       "services": {

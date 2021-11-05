@@ -8,215 +8,215 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-<LinearLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp">
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/ic_baseline_arrow_back_24"
-            android:onClick="previousMonthAction">
-        </Button>
-
-        <TextView
-            android:id="@+id/month_year_TV"
-            android:fontFamily="@font/emmasophia"
-            android:layout_width="0dp"
-            android:layout_weight="5"
-            android:layout_height="wrap_content"
-            android:text="Feb 2021"
-            android:textSize="20dp"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark">
-        </TextView>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/ic_baseline_arrow_forward_24"
-            android:onClick="nextMonthAction">
-        </Button>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:fontFamily="@font/emmasophia"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="LUN"
-            android:textColor="@color/colorPrimaryDark"
-            android:textAlignment="center"
-            android:textSize="10dp">
-        </TextView>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/emmasophia"
-            android:text="MAR"
-            android:textColor="@color/colorPrimaryDark"
-            android:textAlignment="center"
-            android:textSize="10dp">
-        </TextView>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/emmasophia"
-            android:text="MER"
-            android:textColor="@color/colorPrimaryDark"
-            android:textAlignment="center"
-            android:textSize="10dp">
-        </TextView>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/emmasophia"
-            android:text="GIO"
-            android:textColor="@color/colorPrimaryDark"
-            android:textAlignment="center"
-            android:textSize="10dp">
-        </TextView>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/emmasophia"
-            android:text="VEN"
-            android:textColor="@color/colorPrimaryDark"
-            android:textAlignment="center"
-            android:textSize="10dp">
-        </TextView>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/emmasophia"
-            android:text="SAB"
-            android:textColor="@color/colorPrimaryDark"
-            android:textAlignment="center"
-            android:textSize="10dp">
-        </TextView>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/emmasophia"
-            android:text="DOM"
-            android:textColor="@color/colorPrimaryDark"
-            android:textAlignment="center"
-            android:textSize="10dp">
-        </TextView>
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <LinearLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab2"
-            android:onClick="goDeleteMemo"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:fabSize="mini"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="20dp"
-            app:backgroundTint="@color/colorSecondary"
-            app:srcCompat="@drawable/ic_baseline_alarm_off_24"/>
-
-        <TextView
-            android:id="@+id/text_fab2"
-            android:textSize="18dp"
-            android:translationZ="10dp"
-            android:textAlignment="center"
-            android:fontFamily="@font/apollo"
-            android:textStyle="bold"
-            android:background="@drawable/bg_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="72dp"
-            android:layout_marginBottom="24dp"
-            android:layout_toStartOf="@+id/fab2"
-            android:text="Cancella \n Promemoria"
-            android:textColor="@color/colorPrimaryDark"
-            android:visibility="invisible" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab1"
-            android:onClick="goAddMemo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fabSize="mini"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
             android:layout_marginBottom="20dp"
-            android:layout_marginEnd="20dp"
-            app:backgroundTint="@color/colorSecondary"
-            app:srcCompat="@drawable/ic_baseline_add_alarm_24"/>
+            android:layout_marginTop="20dp">
 
-        <TextView
-            android:id="@+id/text_fab1"
-            android:layout_width="wrap_content"
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/ic_baseline_arrow_back_24"
+                android:onClick="previousMonthAction">
+            </Button>
+
+            <TextView
+                android:id="@+id/month_year_TV"
+                android:fontFamily="@font/emmasophia"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:text="Feb 2021"
+                android:textSize="18dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark">
+            </TextView>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/ic_baseline_arrow_forward_24"
+                android:onClick="nextMonthAction">
+            </Button>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:background="@drawable/bg_textview"
-            android:translationZ="10dp"
-            android:textAlignment="center"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="72dp"
-            android:layout_marginBottom="24dp"
-            android:layout_toStartOf="@+id/fab1"
-            android:fontFamily="@font/apollo"
-            android:text="Imposta \n Promemoria"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="18dp"
-            android:visibility="invisible" />
+            android:orientation="horizontal">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="16dp"
-            app:fabSize="normal"
-            app:backgroundTint="@color/colorSecondary"
-            app:srcCompat="@drawable/ic_baseline_access_alarm_24"/>
+            <TextView
+                android:fontFamily="@font/emmasophia"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/lun"
+                android:textColor="@color/colorPrimaryDark"
+                android:textAlignment="center"
+                android:textSize="10dp">
+            </TextView>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/emmasophia"
+                android:text="@string/mar"
+                android:textColor="@color/colorPrimaryDark"
+                android:textAlignment="center"
+                android:textSize="10dp">
+            </TextView>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/emmasophia"
+                android:text="@string/mer"
+                android:textColor="@color/colorPrimaryDark"
+                android:textAlignment="center"
+                android:textSize="10dp">
+            </TextView>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/emmasophia"
+                android:text="@string/gio"
+                android:textColor="@color/colorPrimaryDark"
+                android:textAlignment="center"
+                android:textSize="10dp">
+            </TextView>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/emmasophia"
+                android:text="@string/ven"
+                android:textColor="@color/colorPrimaryDark"
+                android:textAlignment="center"
+                android:textSize="10dp">
+            </TextView>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/emmasophia"
+                android:text="@string/sab"
+                android:textColor="@color/colorPrimaryDark"
+                android:textAlignment="center"
+                android:textSize="10dp">
+            </TextView>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/emmasophia"
+                android:text="@string/dom"
+                android:textColor="@color/colorPrimaryDark"
+                android:textAlignment="center"
+                android:textSize="10dp">
+            </TextView>
 
-        <androidx.recyclerview.widget.RecyclerView
+        </LinearLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/calendar_recycler_view">
-        </androidx.recyclerview.widget.RecyclerView>
+            android:orientation="vertical">
 
-    </RelativeLayout>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab2"
+                android:onClick="goDeleteMemo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fabSize="mini"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="20dp"
+                app:backgroundTint="@color/colorSecondary"
+                app:srcCompat="@drawable/ic_baseline_alarm_off_24"/>
 
-</LinearLayout>
-    
+            <TextView
+                android:id="@+id/text_fab2"
+                android:textSize="18dp"
+                android:translationZ="10dp"
+                android:textAlignment="center"
+                android:fontFamily="@font/apollo"
+                android:textStyle="bold"
+                android:background="@drawable/bg_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="72dp"
+                android:layout_marginBottom="24dp"
+                android:layout_toStartOf="@+id/fab2"
+                android:text="@string/cancella_promemoria"
+                android:textColor="@color/colorPrimaryDark"
+                android:visibility="invisible" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab1"
+                android:onClick="goAddMemo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fabSize="mini"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="20dp"
+                android:layout_marginEnd="20dp"
+                app:backgroundTint="@color/colorSecondary"
+                app:srcCompat="@drawable/ic_baseline_add_alarm_24"/>
+
+            <TextView
+                android:id="@+id/text_fab1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:background="@drawable/bg_textview"
+                android:translationZ="10dp"
+                android:textAlignment="center"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="72dp"
+                android:layout_marginBottom="24dp"
+                android:layout_toStartOf="@+id/fab1"
+                android:fontFamily="@font/apollo"
+                android:text="@string/imposta_promemoria"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18dp"
+                android:visibility="invisible" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="16dp"
+                app:fabSize="normal"
+                app:backgroundTint="@color/colorSecondary"
+                app:srcCompat="@drawable/ic_baseline_access_alarm_24"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/calendar_recycler_view">
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="250dp"
         android:layout_height="match_parent"

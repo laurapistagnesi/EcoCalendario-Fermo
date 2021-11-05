@@ -1,7 +1,6 @@
 package com.example.ecocalendariofermo;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -26,7 +25,7 @@ public class InfoRifiuto extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_rifiuto);
-        getSupportActionBar().setTitle("Informazioni");
+        getSupportActionBar().setTitle(R.string.informazioni);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#166318")));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         name = findViewById(R.id.nome);
@@ -39,6 +38,7 @@ public class InfoRifiuto extends AppCompatActivity {
     }
 
     private void getInfo() {
+        //In base al rifiuto selezionato nel Rifiutario prende le informazioni dall'intent e le mostra
         name.setText(getIntent().getStringExtra("Name"));
         type.setText(getIntent().getStringExtra("Type"));
         if(getIntent().getStringExtra("Info").equals("null")){

@@ -5,17 +5,12 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
@@ -52,9 +47,10 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
         else
         {
             holder.dayOfMonth.setText(String.valueOf(date.getDayOfMonth()));
+            //In base al giorno inserisce l'icona
             if(date.equals(CalendarActivity.selectedDate) && (date.getDayOfWeek() != DayOfWeek.FRIDAY || date.getDayOfWeek() != DayOfWeek.THURSDAY || date.getDayOfWeek() != DayOfWeek.WEDNESDAY || date.getDayOfWeek() != DayOfWeek.MONDAY))
             {
-                holder.parentView.setBackgroundColor(Color.parseColor("#C0FDCC"));
+                holder.parentView.setBackgroundColor(Color.parseColor("#C2EEBD"));
             }
             if (date.getDayOfWeek() == DayOfWeek.MONDAY || date.getDayOfWeek() == DayOfWeek.FRIDAY) {
                 holder.parentView.setBackgroundResource(R.drawable.ic_indifferenziato);

@@ -6,7 +6,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,10 +19,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
-
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -36,6 +36,7 @@ import java.util.Map;
 public class CalendarActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener {
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private GoogleSignInClient mGoogleSignInClient;
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
     public static LocalDate selectedDate;
@@ -65,6 +66,11 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
         textViewfab2 = (TextView) findViewById(R.id.text_fab2);
         textViewfab1 = (TextView) findViewById(R.id.text_fab1);
         drawerLayout = findViewById(R.id.drawer_layout);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("1019300904917-ltmcmij1g8dgplaeje9sj0gkg612hjlm.apps.googleusercontent.com")
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,6 +87,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void setMonthView()
     {
+        //Imposta la visualizzazione mensile del calendario a partire dall'attuale data
         monthYearText.setText(monthYearFromDate(selectedDate).substring(0, 1).toUpperCase() + monthYearFromDate(selectedDate).substring(1));
         ArrayList<LocalDate> daysInMonth = daysInMonthArray(selectedDate);
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
@@ -92,6 +99,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
     @RequiresApi(api = Build.VERSION_CODES.O)
     private ArrayList<LocalDate> daysInMonthArray(LocalDate date)
     {
+        //Restituisce i giorni del mese a partire dalla data selezionata
         ArrayList<LocalDate> daysInMonthArray = new ArrayList<>();
         YearMonth yearMonth = YearMonth.from(date);
         int daysInMonth = yearMonth.lengthOfMonth();
@@ -114,6 +122,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
     @RequiresApi(api = Build.VERSION_CODES.O)
     private String monthYearFromDate(LocalDate date)
     {
+        //Restituisce il mese e l'anno in base alla data selezionata
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
         return date.format(formatter);
     }
@@ -131,17 +140,18 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
             case R.id.logout_button:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Logout");
-                builder.setMessage("Sei sicuro di voler uscire?");
-                builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                builder.setMessage(R.string.conferma_uscita);
+                builder.setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mAuth.signOut();
+                        mGoogleSignInClient.signOut();
                         Intent calendarIntent = new Intent(CalendarActivity.this, LoginActivity.class);
                         startActivity(calendarIntent);
                         finish();
                     }
                 });
-                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -153,7 +163,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
                 openDrawer(drawerLayout);
                 return true;
             case R.id.info_button:
-                showSimpleAdapterAlertDialog();
+                showAdapterAlertDialog();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -186,25 +196,23 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
 
     }
 
-    private void showSimpleAdapterAlertDialog()
+    private void showAdapterAlertDialog()
     {
-        // Each image in array will be displayed at each item beginning.
+        //Ogni immagine nell'array verrà visualizzata all'inizio di ogni elemento
         int[] imageIdArr = {R.drawable.ic_indifferenziato, R.drawable.ic_plastic, R.drawable.ic_carta, R.drawable.ic_baseline_warning_24};
-        // Each item text.
-        String[] listItemArr = {"Rifiuti non riciclabili", "Plastica", "Carta e Cartone", "In caso di giorni festivi il rifiuto verrà raccolto il primo giorno utile successivo"};
+        //Testo di ogni elemento
+        String[] listItemArr = {getString(R.string.indifferenziata), getString(R.string.plastica), getString(R.string.carta), getString(R.string.giorni_festivi)};
 
-        // Image and text item data's key.
+        //key di immagine e testo
         final String CUSTOM_ADAPTER_IMAGE = "image";
         final String CUSTOM_ADAPTER_TEXT = "text";
 
-        // Create a alert dialog builder.
+        // Crea un alert dialog builder
         AlertDialog.Builder builder = new AlertDialog.Builder(CalendarActivity.this);
-        // Set icon value.
         builder.setIcon(R.drawable.ic_logo);
-        // Set title value.
         builder.setTitle("Info");
 
-        // Create SimpleAdapter list data.
+        //Crea lista con elementi
         List<Map<String, Object>> dialogItemList = new ArrayList<Map<String, Object>>();
         int listItemLen = listItemArr.length;
         for(int i=0;i<listItemLen;i++)
@@ -216,13 +224,11 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
             dialogItemList.add(itemMap);
         }
 
-        // Create SimpleAdapter object.
         SimpleAdapter simpleAdapter = new SimpleAdapter(CalendarActivity.this, dialogItemList,
                 R.layout.alert_dialog_info,
                 new String[]{CUSTOM_ADAPTER_IMAGE, CUSTOM_ADAPTER_TEXT},
                 new int[]{R.id.alertDialogItemImageView,R.id.alertDialogItemTextView});
 
-        // Set the data adapter.
         builder.setAdapter(simpleAdapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int itemIndex) {
@@ -236,6 +242,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
     }
 
     private void showFABMenu(){
+        //Apre il menu Floating Action Button
         isFABOpen=true;
         fab1.animate().translationY(-getResources().getDimension(R.dimen.standard_55));
         fab2.animate().translationY(-getResources().getDimension(R.dimen.standard_105));
@@ -246,6 +253,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
     }
 
     private void closeFABMenu(){
+        //Chiude il menu Floating Action Button
         isFABOpen=false;
         fab1.animate().translationY(0);
         fab2.animate().translationY(0);
@@ -254,6 +262,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
     }
 
     private static void openDrawer (DrawerLayout drawerLayout){
+        //Apre il menu laterale
         if (drawerLayout.isDrawerOpen(GravityCompat.START)){
             drawerLayout.closeDrawer(GravityCompat.START);
         }
@@ -263,6 +272,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
     }
 
     private static void closeDrawer (DrawerLayout drawerLayout){
+        //Chiude il menu laterale
         if (drawerLayout.isDrawerOpen(GravityCompat.START)){
             drawerLayout.closeDrawer(GravityCompat.START);
         }

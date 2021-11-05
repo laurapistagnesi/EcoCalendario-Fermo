@@ -1,19 +1,14 @@
 package com.example.ecocalendariofermo;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class SegnalazioniActivity extends AppCompatActivity {
 
@@ -25,7 +20,7 @@ public class SegnalazioniActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_segnalazioni);
-        getSupportActionBar().setTitle("Invia Segnalazione");
+        getSupportActionBar().setTitle(R.string.invia_segnalazione);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#166318")));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -45,13 +40,13 @@ public class SegnalazioniActivity extends AppCompatActivity {
         String message = eMsg.getText().toString().trim();
 
         if (subject.isEmpty()) {
-            eSubject.setError("Inserire oggetto");
+            eSubject.setError(getString(R.string.inserire_oggetto));
             eSubject.requestFocus();
             return;
         }
 
         if (message.isEmpty()) {
-            eMsg.setError("Inserire messaggio");
+            eMsg.setError(getString(R.string.inserire_messaggio));
             eMsg.requestFocus();
             return;
         }
@@ -60,7 +55,7 @@ public class SegnalazioniActivity extends AppCompatActivity {
         it.putExtra(Intent.EXTRA_SUBJECT, eSubject.getText().toString());
         it.putExtra(Intent.EXTRA_TEXT, eMsg.getText());
         it.setType("message/rfc822");
-        startActivity(Intent.createChooser(it,"Choose Mail App"));
+        startActivity(Intent.createChooser(it,getString(R.string.scegli_app_email)));
     }
 
     @Override

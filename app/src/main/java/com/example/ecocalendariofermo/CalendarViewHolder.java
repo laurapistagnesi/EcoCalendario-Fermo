@@ -3,11 +3,9 @@ package com.example.ecocalendariofermo;
 import android.os.Build;
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 

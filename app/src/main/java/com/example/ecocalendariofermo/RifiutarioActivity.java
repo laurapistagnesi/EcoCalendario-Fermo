@@ -1,61 +1,28 @@
 package com.example.ecocalendariofermo;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MenuItemCompat;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.Source;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 
 public class RifiutarioActivity extends AppCompatActivity{
@@ -69,10 +36,9 @@ public class RifiutarioActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rifiutario);
-        getSupportActionBar().setTitle("Rifiutario");
+        getSupportActionBar().setTitle(R.string.rifiutario);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#166318")));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         progressBar = findViewById(R.id.progressBar);
         searchEdit = findViewById(R.id.editSearch);
         listView = findViewById(R.id.rifiutiList);
@@ -82,8 +48,10 @@ public class RifiutarioActivity extends AppCompatActivity{
     }
 
     private void setElenco() {
+        //Prende dal database tutta la raccola Rifiuti con una query
+        //Ogni risultato della query viene aggiunto all'ArrayList e visualizzato nella ListView
         Query firebaseSearchQuery = db.collection("Rifiuti");
-        ArrayList<Rifiuto> datifiltrati = new ArrayList<>();
+        ArrayList<Rifiuto> rifiuti = new ArrayList<>();
         firebaseSearchQuery.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -91,26 +59,26 @@ public class RifiutarioActivity extends AppCompatActivity{
                         progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                datifiltrati.add(new Rifiuto(document.getString("name"), document.getString("type"), document.getString("info")));
+                                rifiuti.add(new Rifiuto(document.getString("name"), document.getString("type"), document.getString("info")));
                             }
-                            Log.d("TAG", String.valueOf(datifiltrati));
-                            RifiutarioAdapter rifiutarioAdapter = new RifiutarioAdapter(getApplicationContext(), R.layout.list_items, datifiltrati);
+                            RifiutarioAdapter rifiutarioAdapter = new RifiutarioAdapter(getApplicationContext(), R.layout.list_items, rifiuti);
                             listView.setAdapter(rifiutarioAdapter);
                         } else {
-                            Log.d("TAG", "Error getting documents: ", task.getException());
+                            Toast.makeText(getApplicationContext(), "Errore", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Al click visualizza le informazioni di ogni rifiuto attraverso l'activity InfoRifiuto
                 Intent intent = new Intent(getApplicationContext(), InfoRifiuto.class);
-                intent.putExtra("Name", datifiltrati.get(position).getName());
-                intent.putExtra("Type", datifiltrati.get(position).getType());
-                if(datifiltrati.get(position).getInfo() == null){
+                intent.putExtra("Name", rifiuti.get(position).getName());
+                intent.putExtra("Type", rifiuti.get(position).getType());
+                if(rifiuti.get(position).getInfo() == null){
                     intent.putExtra("Info", "null");
                 } else{
-                    intent.putExtra("Info", datifiltrati.get(position).getInfo());
+                    intent.putExtra("Info", rifiuti.get(position).getInfo());
                 }
                 startActivity(intent);
             }
@@ -125,6 +93,7 @@ public class RifiutarioActivity extends AppCompatActivity{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Prende dal database tutta la raccola Rifiuti con una query
                 Query firebaseSearchQuery = db.collection("Rifiuti");
                 firebaseSearchQuery.get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -133,12 +102,11 @@ public class RifiutarioActivity extends AppCompatActivity{
                                 if (task.isSuccessful()) {
                                     ArrayList<Rifiuto> datifiltrati = new ArrayList<>();
                                     for (QueryDocumentSnapshot document : task.getResult()) {
+                                        //Se il risultato contiene il testo inserito nell'EditText, viene aggiunto all'ArrayList e visualizzato nella ListView
                                         if (Objects.requireNonNull(document.getString("name").toLowerCase()).contains(s.toString().toLowerCase())){
-                                            Log.d("TAG", document.getId() + " => " + document.getData());
                                             datifiltrati.add(new Rifiuto(document.getString("name"), document.getString("type"), document.getString("info")));
                                         }
                                     }
-                                    Log.d("TAG", String.valueOf(datifiltrati));
                                     RifiutarioAdapter rifiutarioAdapter = new RifiutarioAdapter(getApplicationContext(), R.layout.list_items, datifiltrati);
                                     listView.setAdapter(rifiutarioAdapter);
                                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

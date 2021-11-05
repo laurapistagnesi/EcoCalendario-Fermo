@@ -5,15 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,7 +43,7 @@ public class InfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
-        getSupportActionBar().setTitle("Informazioni");
+        getSupportActionBar().setTitle(R.string.informazioni);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#166318")));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -52,15 +53,15 @@ public class InfoActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         Query query1 = db.collection("Notizie");
         setElenco(query1);
-        /*new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.setVisibility(View.GONE);
-            }
-        }, 1000);*/
+        if (!isConnected()) {
+            Toast.makeText(getApplicationContext(), R.string.connettiti, Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setElenco(Query query) {
+        //FirestoreRecyclerAdapter associa i risultati di una query a un recyclerview
+        //Prende tutte le Notizia da Firestore Database e le visualizza con immagine e titolo
+        //Al click di un titolo viene visualizzato il pdf associato
         FirestoreRecyclerOptions<Notizia> options = new FirestoreRecyclerOptions.Builder<Notizia>()
                 .setQuery(query, Notizia.class)
                 .build();
@@ -81,7 +82,7 @@ public class InfoActivity extends AppCompatActivity {
                         try{
                             startActivity(pdfIntent);
                         }catch(ActivityNotFoundException e){
-                            Toast.makeText(InfoActivity.this, "No Application available to view PDF", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(InfoActivity.this, R.string.no_pdf, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -114,20 +115,32 @@ public class InfoActivity extends AppCompatActivity {
 
     public static Bitmap getBitmapFromURL(String src) {
         try {
-            //Log.e("src",src);
+            //Prende l'url (contenuto in un campo nel database) e restitusce un'immagine Bitmap
             URL url = new URL(src);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoInput(true);
             connection.connect();
             InputStream input = connection.getInputStream();
             Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            //Log.e("Bitmap","returned");
             return myBitmap;
         } catch (IOException e) {
             e.printStackTrace();
-            //Log.e("Exception",e.getMessage());
             return null;
         }
+    }
+
+    //Controlla la connessione
+    public boolean isConnected() {
+        boolean connected = false;
+        try {
+            ConnectivityManager cm = (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo nInfo = cm.getActiveNetworkInfo();
+            connected = nInfo != null && nInfo.isAvailable() && nInfo.isConnected();
+            return connected;
+        } catch (Exception e) {
+            Log.e("Connectivity Exception", e.getMessage());
+        }
+        return connected;
     }
 
     @Override
