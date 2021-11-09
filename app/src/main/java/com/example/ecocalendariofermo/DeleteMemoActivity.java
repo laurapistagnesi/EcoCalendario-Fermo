@@ -28,17 +28,19 @@ public class DeleteMemoActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     public static final String MyPREFERENCES = "Memo";
     public TextView titolo;
+    public TextView noMemo;
     ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_memo);
-        getSupportActionBar().setTitle(R.string.elimina_memo);
+        getSupportActionBar().setTitle(R.string.gestisci_memo);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#166318")));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         sharedPreferences = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
         titolo = findViewById(R.id.titolo1);
+        noMemo = findViewById(R.id.no_memo);
         listView = findViewById(R.id.memoList);
         ArrayList<Memo> arrayList = new ArrayList<>();
         String t2 = sharedPreferences.getString(titoloPromemoria, null);
@@ -72,6 +74,10 @@ public class DeleteMemoActivity extends AppCompatActivity {
         if(sharedPreferences.contains("Sveglia domenica")){
             String m7 = getDate(sharedPreferences.getLong("Sveglia domenica", 0), "HH:mm");
             arrayList.add(new Memo(getString(R.string.domenica), m7, R.drawable.ic_vetro));
+        }
+        if(sharedPreferences.getAll().size() == 1 || sharedPreferences.getAll().size() == 0){
+            noMemo.setVisibility(View.VISIBLE);
+            titolo.setVisibility(View.INVISIBLE);
         }
 
         MemoAdapter memoAdapter = new MemoAdapter(this, R.layout.list_row, arrayList);

@@ -17,7 +17,7 @@
     <string name="ven">FRI</string>
     <string name="sab">SAT</string>
     <string name="dom">SUN</string>
-    <string name="cancella_promemoria">Delete \n Memo</string>
+    <string name="gestisci_promemoria">Manage \n Memo</string>
     <string name="imposta_promemoria">Add \n Memo</string>
     <string name="conferma_uscita">Are you sure you want to quit?</string>
     <string name="si">YES</string>
@@ -41,7 +41,7 @@
     <string name="informazioni">Advice</string>
     <string name="segnalazioni">Reports</string>
     <string name="aggiungi_memo">Add Memo</string>
-    <string name="elimina_memo">Delete Memo</string>
+    <string name="gestisci_memo">Manage Memo</string>
     <string name="lunedi">Monday</string>
     <string name="martedi">Tuesday</string>
     <string name="mercoledi">Wednesday</string>

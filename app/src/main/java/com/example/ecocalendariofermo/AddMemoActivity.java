@@ -217,5 +217,9 @@ public class AddMemoActivity extends AppCompatActivity {
             this.startService(i);
         }
         Toast.makeText(this, getString(R.string.memo_impostato), Toast.LENGTH_SHORT).show();
+        Intent hintent = new Intent(AddMemoActivity.this, CalendarActivity.class);
+        hintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(hintent);
+        finish();
     }
 }

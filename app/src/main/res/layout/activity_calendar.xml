@@ -160,7 +160,7 @@
                 android:layout_marginEnd="72dp"
                 android:layout_marginBottom="24dp"
                 android:layout_toStartOf="@+id/fab2"
-                android:text="@string/cancella_promemoria"
+                android:text="@string/gestisci_promemoria"
                 android:textColor="@color/colorPrimaryDark"
                 android:visibility="invisible" />
 

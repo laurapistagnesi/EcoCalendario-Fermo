@@ -17,7 +17,7 @@
     <string name="ven">VEN</string>
     <string name="sab">SAB</string>
     <string name="dom">DOM</string>
-    <string name="cancella_promemoria">Cancella \n Promemoria</string>
+    <string name="gestisci_promemoria">Gestisci \n Promemoria</string>
     <string name="imposta_promemoria">Imposta \n Promemoria</string>
     <string name="conferma_uscita">Sei sicuro di voler uscire?</string>
     <string name="si">SI</string>
@@ -41,7 +41,7 @@
     <string name="informazioni">Informazioni</string>
     <string name="segnalazioni">Segnalazioni</string>
     <string name="aggiungi_memo">Aggiungi Promemoria</string>
-    <string name="elimina_memo">Elimina Promemoria</string>
+    <string name="gestisci_memo">Gestisci Promemoria</string>
     <string name="lunedi">Lunedi</string>
     <string name="martedi">Martedi</string>
     <string name="mercoledi">Mercoledi</string>
